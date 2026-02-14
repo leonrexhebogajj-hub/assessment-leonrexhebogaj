@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './components/Auth'
 import VideoUpload from './components/VideoUpload'
+import VideoPlayer from './components/VideoPlayer' // Import the new component
 import './App.css'
 
 function App() {
@@ -31,23 +32,23 @@ function App() {
 
   return (
     <div className="container">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <header>
         <h1>Video Lab Dashboard</h1>
-        <button onClick={() => supabase.auth.signOut()} style={{ background: '#dc3545' }}>
+        <button onClick={() => supabase.auth.signOut()} style={{ background: '#ef4444', width: 'auto' }}>
           Sign Out
         </button>
       </header>
 
       <main>
-        <p>Welcome, {session.user.email}!</p>
-        <hr />
+        <div style={{ marginBottom: '2rem' }}>
+          <p style={{ color: '#64748b' }}>Logged in as: <strong>{session.user.email}</strong></p>
+        </div>
 
-        <VideoUpload session={session} onUploadComplete={() => console.log('Upload refreshed')} />
+        {/* Pass a key to force re-render if needed, or just let components handle their state */}
+        <VideoUpload session={session} onUploadComplete={() => window.location.reload()} />
 
-        {/* We will add the VideoPlayer component here next */}
-        <div style={{ marginTop: '40px' }}>
-          <h2>Your Videos</h2>
-          <p>Video list coming soon...</p>
+        <div style={{ marginTop: '4rem' }}>
+          <VideoPlayer session={session} />
         </div>
       </main>
     </div>

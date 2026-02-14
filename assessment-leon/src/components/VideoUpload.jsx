@@ -18,25 +18,40 @@ export default function VideoUpload({ session, onUploadComplete }) {
         try {
             setUploading(true)
 
-            // 1. Upload file to Supabase Storage
+            // Generate file path
             const fileExt = videoFile.name.split('.').pop()
             const fileName = `${Math.random()}.${fileExt}`
             const filePath = `${fileName}`
 
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('videos')
+            // Try uploading to 'videos' (lowercase) first
+            let bucketName = 'videos'
+
+            // Attempt 1
+            const { error: firstError } = await supabase.storage
+                .from(bucketName)
                 .upload(filePath, videoFile)
 
-            if (uploadError) {
-                throw uploadError
+            // If that fails, try 'VIDEOS' (uppercase)
+            if (firstError) {
+                console.warn('Upload to "videos" failed, trying "VIDEOS"...', firstError)
+                bucketName = 'VIDEOS'
+
+                // Attempt 2
+                const { error: secondError } = await supabase.storage
+                    .from(bucketName)
+                    .upload(filePath, videoFile)
+
+                if (secondError) {
+                    throw secondError // If both fail, throw error
+                }
             }
 
-            // 2. Get Public URL
+            // Get Public URL
             const { data: { publicUrl } } = supabase.storage
-                .from('videos')
+                .from(bucketName)
                 .getPublicUrl(filePath)
 
-            // 3. Save metadata to 'videos' table
+            // Save metadata to 'videos' table
             const { error: dbError } = await supabase
                 .from('videos')
                 .insert([
@@ -56,10 +71,11 @@ export default function VideoUpload({ session, onUploadComplete }) {
             setTitle('')
             setDescription('')
             setVideoFile(null)
-            if (onUploadComplete) onUploadComplete() // Refresh the list if needed
+            if (onUploadComplete) onUploadComplete()
 
         } catch (error) {
             alert('Error uploading video: ' + error.message)
+            console.error(error)
         } finally {
             setUploading(false)
         }
