@@ -23,32 +23,18 @@ export default function VideoUpload({ session, onUploadComplete }) {
             const fileName = `${Math.random()}.${fileExt}`
             const filePath = `${fileName}`
 
-            // Try uploading to 'videos' (lowercase) first
-            let bucketName = 'videos'
-
-            // Attempt 1
-            const { error: firstError } = await supabase.storage
-                .from(bucketName)
+            // Upload directly to 'VIDEOS' bucket
+            const { error: uploadError } = await supabase.storage
+                .from('VIDEOS')
                 .upload(filePath, videoFile)
 
-            // If that fails, try 'VIDEOS' (uppercase)
-            if (firstError) {
-                console.warn('Upload to "videos" failed, trying "VIDEOS"...', firstError)
-                bucketName = 'VIDEOS'
-
-                // Attempt 2
-                const { error: secondError } = await supabase.storage
-                    .from(bucketName)
-                    .upload(filePath, videoFile)
-
-                if (secondError) {
-                    throw secondError // If both fail, throw error
-                }
+            if (uploadError) {
+                throw uploadError
             }
 
             // Get Public URL
             const { data: { publicUrl } } = supabase.storage
-                .from(bucketName)
+                .from('VIDEOS')
                 .getPublicUrl(filePath)
 
             // Save metadata to 'videos' table
