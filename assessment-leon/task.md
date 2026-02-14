@@ -1,23 +1,11 @@
-# Internship Assessment Task List
+# Web App Layout Refactor
 
-- [x] **Project Setup**
-    - [x] Initialize Vite + React
-    - [x] Setup Supabase Client
-    - [x] Commit to GitHub
+- [x] **CSS Grid Layout**
+    - [x] Create a split-screen layout for Desktop (min-width: 1024px). <!-- id: 0 -->
+    - [x] Style the Left Sidebar (Upload Form). <!-- id: 1 -->
+    - [x] Style the Main Content Area (Video Feed). <!-- id: 2 -->
 
-- [x] **Core Features**
-    - [x] Authentication (Login/Signup)
-    - [x] Video Upload
-    - [x] Video Player
-    - [x] Annotations (Basic Create/List)
-    - [x] Bookmarks (Create/List + Seek)
-
-- [/] **Frontend Polish (Requirement Compliance)**
-    - [/] **Reactive Annotations**: Make annotations appear/highlight during playback (Requirement: "visible when the video reaches..."). <!-- id: 0 -->
-    - [/] **Center/Fix Layout**: Ensure strict centering as requested. <!-- id: 1 -->
-
-- [ ] **Documentation**
-    - [ ] **README.md**: Write detailed setup and tech stack documentation. <!-- id: 2 -->
-
-- [ ] **Final Review**
-    - [ ] Verify against "Frontend Intern" rubric (UI behavior, interactions). <!-- id: 3 -->
+- [x] **UI Polish**
+    - [x] Refine all buttons (remove full-width on desktop). <!-- id: 3 -->
+    - [x] Improve shadow and border-radius for a "SaaS" look. <!-- id: 4 -->
+    - [x] Ensure "Sign Out" button is distinct and modern. <!-- id: 5 -->

@@ -23,18 +23,19 @@ export default function VideoUpload({ session, onUploadComplete }) {
             const fileName = `${Math.random()}.${fileExt}`
             const filePath = `${fileName}`
 
-            // Upload directly to 'VIDEOS' bucket
+            // Upload directly to 'Videos Wayland' bucket
+            // Path is randomized to prevent collisions
             const { error: uploadError } = await supabase.storage
-                .from('VIDEOS')
+                .from('Videos Wayland')
                 .upload(filePath, videoFile)
 
             if (uploadError) {
                 throw uploadError
             }
 
-            // Get Public URL
+            // Get the Public URL of the uploaded file for database storage
             const { data: { publicUrl } } = supabase.storage
-                .from('VIDEOS')
+                .from('Videos Wayland')
                 .getPublicUrl(filePath)
 
             // Save metadata to 'videos' table
@@ -99,7 +100,7 @@ export default function VideoUpload({ session, onUploadComplete }) {
                         style={{ marginTop: '5px' }}
                     />
                 </div>
-                <button type="submit" disabled={uploading} style={{ alignSelf: 'flex-start', padding: '10px 20px' }}>
+                <button type="submit" disabled={uploading} style={{ alignSelf: 'center', padding: '10px 40px' }}>
                     {uploading ? 'Uploading...' : 'Upload Video'}
                 </button>
             </form>

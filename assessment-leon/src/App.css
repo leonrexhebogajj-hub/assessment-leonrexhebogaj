@@ -18,7 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  /* Changed from 100vw to prevent horizontal scrollbar issues */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
@@ -174,6 +175,7 @@ button:active,
   border-radius: 8px;
   font-size: 1rem;
   background-color: #f7fafc;
+  color: #2d3748;
   transition: all 0.2s ease;
 }
 
@@ -198,7 +200,6 @@ button:active,
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
-  width: 100%;
 }
 
 .upload-container button:hover {
@@ -247,4 +248,27 @@ button:active,
   color: #718096;
   font-size: 0.9rem;
   margin-bottom: 1rem;
+}
+
+/* Desktop Split-Screen Layout */
+@media (min-width: 1024px) {
+  main {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .upload-container {
+    margin: 0;
+    /* Reset auto margins */
+    max-width: none;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .video-grid {
+    margin-top: 0;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }

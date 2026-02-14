@@ -5,6 +5,7 @@ export default function Annotations({ session, videoId, currentTime, onRequestSe
     const [annotations, setAnnotations] = useState([])
     const [text, setText] = useState('')
 
+    // Fetch existing annotations whenever the videoId changes
     useEffect(() => {
         if (videoId) fetchAnnotations()
     }, [videoId])
@@ -61,6 +62,7 @@ export default function Annotations({ session, videoId, currentTime, onRequestSe
 
             <div className="annotations-list">
                 {annotations.map((note) => {
+                    // Reactive Highlighting: Check if the video's current time is near the annotation timestamp
                     const isActive = Math.abs(currentTime - note.timestamp) < 2
                     return (
                         <div

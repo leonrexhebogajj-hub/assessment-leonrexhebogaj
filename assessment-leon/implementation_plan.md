@@ -1,32 +1,25 @@
-# Implementation Plan - Final Polish
+# Implementation Plan - Desktop Layout Overhaul
 
-We have completed most of the core functionality. To fully satisfy the "Frontend Intern" requirements, we need to address a few specific points to demonstrate "UI behavior" and "interactions".
+The user wants a layout that looks like a **Web App**, not a mobile app. The current single-column layout fails to utilize desktop width effectively.
 
-## Remaining Requirements Checklist
+## Proposed Design: Two-Column Dashboard
 
-- [x] **User Accounts**: Login implemented.
-- [ ] **Annotations Behavior**: Requirement says "Annotations should be **visible when** the video reaches the related timestamp".
-    - *Current State*: Annotations are always visible in a list.
-    - *Improvement*: Display the annotation text *overlaying* the video or highlight the list item when playback reaches that timestamp. This shows strong Frontend state management skills.
-- [x] **Bookmarks**: Implemented.
-- [ ] **Admin View**: "Admin users should be able to view all videos, annotations and bookmarks".
-    - *Current State*: Videos and Annotations are public. Bookmarks are private (RLS).
-    - *Recommendation*: Since you are applying for **Frontend**, building a complex role system is "Backend" work. We can simply ensure the UI handles a basic "Admin" route or just explain this limitation in the README.
-- [ ] **README.md**: "Your repository must include a README.md explaining how to run, technologies, assumptions".
-    - *Current State*: Default Vite README.
-    - *Action*: Rewrite this completely.
+We will switch from a vertical stack to a grid/flex layout on desktop screens.
 
-## Proposed Changes
+### 1. Main Container
+- Use `display: grid` with a sidebar ratio (e.g., `350px 1fr`).
+- **Left Column**: Upload Panel (Sticky/Fixed).
+- **Right Column**: Video Feed.
 
-### 1. Enhance Annotation UI (Frontend Focus)
-Make annotations "alive".
-- **File**: `src/components/Annotations.jsx`, `src/components/VideoPlayer.jsx`
-- **Feature**: When video plays, check the `currentTime`. If it matches an annotation's timestamp (within 1-2 seconds), display that annotation in a special "Active Note" box or overlay on the video.
+### 2. Component Refactoring
+- **Upload Section**: Move to the left. Make it taller and narrower, suitable for a sidebar.
+- **Video Grid**: Expand to fill the rest of the screen. Cards should be responsive (`repeat(auto-fill, minmax(300px, 1fr))`).
 
-### 2. Create Professional README
-Use the required format.
-- **File**: `README.md`
-- **Content**: Setup instructions, Tech Stack (React, Vite, Supabase), Features, and "Assumptions/Limitations" (where we explain the Admin view decision).
+### 3. Button Polish
+- Stop using `width: 100%` on desktop buttons.
+- Use explicit padding and font weights for a "Pro" feel.
+- Ensure "Sign Out" is well-placed (maybe in the sidebar or top-right header).
 
-### 3. Final Code Cleanup
-Review `App.css` and `App.jsx` one last time to ensure standard formatting (Prettier-like). 
+## Files to Modify
+- `src/App.css`: Major CSS Grid implementation.
+- `src/App.jsx`: wrapper structure changes if necessary (CSS Grid might handle it without DOM changes).
