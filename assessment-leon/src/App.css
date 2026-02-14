@@ -6,9 +6,9 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f7fafc;
+  color: #2d3748;
   line-height: 1.6;
 }
 
@@ -19,199 +19,221 @@ body {
   align-items: center;
   min-height: 100vh;
   width: 100vw;
-  background-color: #eef2f3;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .auth-card {
   background: white;
-  padding: 2rem 3rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 100%;
   max-width: 400px;
   text-align: center;
 }
 
 .auth-card h2 {
-  margin-bottom: 20px;
-  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  color: #1a202c;
+  font-size: 1.8rem;
+}
+
+.auth-card p {
+  color: #718096;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
 }
 
 .auth-card input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .auth-card button {
   width: 100%;
-  padding: 12px;
-  background-color: #3498db;
+  padding: 0.75rem;
+  background-color: #667eea;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 .auth-card button:hover {
-  background-color: #2980b9;
+  background-color: #5a67d8;
 }
 
-/* Dashboard Layout */
+.auth-card button[type="button"] {
+  /* Sign Up Button specifically */
+  background-color: transparent;
+  color: #718096;
+  margin-top: 1rem;
+}
+
+.auth-card button[type="button"]:hover {
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+/* Dashboard Container */
 .container {
   max-width: 1000px;
   margin: 40px auto;
-  /* Centers the container horizontally */
   padding: 0 20px;
 }
 
+/* Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-bottom: 30px;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  position: relative;
+  /* Checking context for centering */
 }
 
 header h1 {
-  font-size: 24px;
-  color: #2c3e50;
-  /* If you want the text itself centered in the available space, you'd need a different layout.
-     But 'justify-content: space-between' pushes it to the left.
-     Let's allow it to take up space if we want true centering, but usually left-align title + right-align button is standard.
-
-     If the USER specifically means the text "Video Lab" inside the Auth screen, that's different.
-     Assuming they mean the Dashboard Header:
-  */
-  flex-grow: 1;
-  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
-/* To balance the center text because of the button on the right, we might need a spacer or absolute positioning.
-   But for a simple fix, let's try text-align center on the h1 and see if that satisfied "centered".
-*/
-
 .btn-danger {
-  background-color: #e74c3c;
+  background-color: #fc8181;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  transition: background 0.2s;
+  z-index: 2;
+  /* Ensure it lies above the centered h1 if overlap usually won't */
+}
+
+.btn-danger:hover {
+  background-color: #f56565;
 }
 
 /* Upload Section */
 .upload-container {
   background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin: 0 auto 40px auto;
-  /* Centers the box itself */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 3rem auto;
+  /* Center horizontally */
   max-width: 600px;
-  /* Limit width so it looks good centered */
   text-align: center;
-  /* Center the text/labels inside if desired, or keep left for forms */
 }
 
 .upload-container h3 {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  color: #2d3748;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 1rem;
 }
 
 .upload-container form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Center form inputs */
-  width: 100%;
-}
-
-.upload-container div {
-  width: 100%;
-  text-align: left;
-  /* Keep labels readable */
-  max-width: 400px;
-  /* constrain input width */
+  gap: 1rem;
 }
 
 .upload-container input[type="text"],
 .upload-container textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-top: 5px;
+  max-width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-family: inherit;
+}
+
+.upload-container input[type="file"] {
+  margin: 0.5rem 0;
 }
 
 .upload-container button {
-  margin-top: 15px;
-  background-color: #2ecc71;
+  background-color: #48bb78;
   color: white;
   border: none;
-  padding: 10px 25px;
-  border-radius: 5px;
+  padding: 0.75rem 2rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 16px;
+  transition: background 0.2s;
   width: 100%;
-  max-width: 200px;
+}
+
+.upload-container button:hover {
+  background-color: #38a169;
 }
 
 /* Video Grid */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* Responsive grid */
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
   justify-content: center;
-  /* Center the grid items if they don't fill the row */
-  text-align: center;
 }
 
 .video-card {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
-  max-width: 500px;
-  /* meaningful max width */
-  margin: 0 auto;
-  /* Center individual cards if grid has 1 item */
 }
 
 .video-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .video-card video {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  background: #000;
+  background: black;
 }
 
 .video-info {
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .video-info h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
 }
 
 .video-info p {
-  color: #7f8c8d;
-  font-size: 14px;
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
