@@ -41,17 +41,22 @@ export default function Annotations({ session, videoId, currentTime, onRequestSe
     }
 
     return (
-        <div style={{ marginTop: '20px', padding: '15px', border: '1px solid #ddd' }}>
-            <h4>Annotations</h4>
+        <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
+            <h4 style={{ marginBottom: '10px' }}>Annotations</h4>
             <form onSubmit={handleAddAnnotation} style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
                 <input
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Add a note at this timestamp..."
-                    style={{ flex: 1 }}
+                    placeholder="Add a note..."
+                    style={{ flex: 1, padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
                 />
-                <button type="submit">Add Note</button>
+                <button
+                    type="submit"
+                    style={{ padding: '8px 15px', background: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                    Add
+                </button>
             </form>
 
             <div className="annotations-list">
@@ -60,15 +65,18 @@ export default function Annotations({ session, videoId, currentTime, onRequestSe
                         key={note.id}
                         onClick={() => onRequestSeek(note.timestamp)}
                         style={{
-                            padding: '10px',
-                            borderBottom: '1px solid #eee',
+                            padding: '8px',
+                            background: '#f8f9fa',
+                            marginBottom: '5px',
+                            borderRadius: '4px',
                             cursor: 'pointer',
                             display: 'flex',
-                            justifyContent: 'space-between'
+                            justifyContent: 'space-between',
+                            fontSize: '14px'
                         }}
                     >
                         <span>{note.text}</span>
-                        <span style={{ color: '#007bff' }}>
+                        <span style={{ color: '#3498db', fontWeight: 'bold' }}>
                             {Math.floor(note.timestamp)}s
                         </span>
                     </div>

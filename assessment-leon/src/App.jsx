@@ -24,8 +24,10 @@ function App() {
 
   if (!session) {
     return (
-      <div className="container login-container">
-        <Auth />
+      <div className="login-wrapper">
+        <div className="auth-card">
+          <Auth />
+        </div>
       </div>
     )
   }
@@ -33,23 +35,16 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>Video Lab Dashboard</h1>
-        <button onClick={() => supabase.auth.signOut()} style={{ background: '#ef4444', width: 'auto' }}>
+        <h1>Video Lab</h1>
+        <button onClick={() => supabase.auth.signOut()} className="btn-danger">
           Sign Out
         </button>
       </header>
 
       <main>
-        <div style={{ marginBottom: '2rem' }}>
-          <p style={{ color: '#64748b' }}>Logged in as: <strong>{session.user.email}</strong></p>
-        </div>
-
-        {/* Pass a key to force re-render if needed, or just let components handle their state */}
         <VideoUpload session={session} onUploadComplete={() => window.location.reload()} />
 
-        <div style={{ marginTop: '4rem' }}>
-          <VideoPlayer session={session} />
-        </div>
+        <VideoPlayer session={session} />
       </main>
     </div>
   )

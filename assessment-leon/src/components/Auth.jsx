@@ -34,9 +34,9 @@ export default function Auth() {
     }
 
     return (
-        <div className="auth-form">
-            <h2>Welcome to Video Lab</h2>
-            <p>Sign in to upload and annotate videos</p>
+        <div>
+            <h2>Login</h2>
+            <p>Sign in to access your dashboard</p>
             <form onSubmit={handleLogin}>
                 <input
                     type="email"
@@ -55,7 +55,12 @@ export default function Auth() {
                 <button type="submit" disabled={loading}>
                     {loading ? 'Loading...' : 'Sign In'}
                 </button>
-                <button type="button" onClick={handleSignUp} disabled={loading} style={{ backgroundColor: '#6c757d', marginTop: '10px' }}>
+                <button
+                    type="button"
+                    onClick={handleSignUp}
+                    disabled={loading}
+                    style={{ marginTop: '10px', background: '#666' }}
+                >
                     Sign Up
                 </button>
             </form>
