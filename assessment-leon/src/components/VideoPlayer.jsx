@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../supabaseClient'
 import Annotations from './Annotations'
+import Bookmarks from './Bookmarks'
 
 export default function VideoPlayer({ session }) {
     const [videos, setVideos] = useState([])
@@ -71,12 +72,21 @@ export default function VideoPlayer({ session }) {
                             <div className="video-info">
                                 <h3>{video.title}</h3>
                                 <p>{video.description}</p>
-                                <Annotations
-                                    session={session}
-                                    videoId={video.id}
-                                    currentTime={currentTime}
-                                    onRequestSeek={(time) => seekTo(video.id, time)}
-                                />
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                    <Bookmarks
+                                        session={session}
+                                        videoId={video.id}
+                                        currentTime={currentTime}
+                                        onRequestSeek={(time) => seekTo(video.id, time)}
+                                    />
+                                    <Annotations
+                                        session={session}
+                                        videoId={video.id}
+                                        currentTime={currentTime}
+                                        onRequestSeek={(time) => seekTo(video.id, time)}
+                                    />
+                                </div>
                             </div>
                         </div>
                     ))}
