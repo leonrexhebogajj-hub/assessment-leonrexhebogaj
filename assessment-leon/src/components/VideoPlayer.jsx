@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../supabaseClient'
+import Annotations from './Annotations'
 
 export default function VideoPlayer({ session }) {
     const [videos, setVideos] = useState([])
     const [loading, setLoading] = useState(true)
+    const [currentTime, setCurrentTime] = useState(0)
+    const videoRefs = useRef({})
 
     // Fetch videos on mount
     useEffect(() => {
@@ -21,9 +24,19 @@ export default function VideoPlayer({ session }) {
             if (error) throw error
             setVideos(data)
         } catch (error) {
-            console.error('Error fetching videos:', error.message)
+            console.error(error.message)
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handleTimeUpdate = (id, time) => {
+        setCurrentTime(time)
+    }
+
+    const seekTo = (id, time) => {
+        if (videoRefs.current[id]) {
+            videoRefs.current[id].currentTime = time
         }
     }
 
@@ -42,18 +55,28 @@ export default function VideoPlayer({ session }) {
             </div>
 
             {videos.length === 0 ? (
-                <p style={{ color: '#64748b' }}>No videos uploaded yet. upload one above!</p>
+                <p style={{ color: '#64748b' }}>No videos uploaded yet.</p>
             ) : (
                 <div className="video-grid">
                     {videos.map((video) => (
                         <div key={video.id} className="video-card">
-                            <video controls preload="metadata">
+                            <video
+                                controls
+                                ref={(el) => videoRefs.current[video.id] = el}
+                                onTimeUpdate={(e) => handleTimeUpdate(video.id, e.target.currentTime)}
+                            >
                                 <source src={video.url} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                             <div className="video-info">
                                 <h3>{video.title}</h3>
-                                <p>{video.description || 'No description'}</p>
+                                <p>{video.description}</p>
+                                <Annotations
+                                    session={session}
+                                    videoId={video.id}
+                                    currentTime={currentTime}
+                                    onRequestSeek={(time) => seekTo(video.id, time)}
+                                />
                             </div>
                         </div>
                     ))}
