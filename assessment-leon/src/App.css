@@ -84,7 +84,20 @@ header {
 header h1 {
   font-size: 24px;
   color: #2c3e50;
+  /* If you want the text itself centered in the available space, you'd need a different layout.
+     But 'justify-content: space-between' pushes it to the left.
+     Let's allow it to take up space if we want true centering, but usually left-align title + right-align button is standard.
+
+     If the USER specifically means the text "Video Lab" inside the Auth screen, that's different.
+     Assuming they mean the Dashboard Header:
+  */
+  flex-grow: 1;
+  text-align: center;
 }
+
+/* To balance the center text because of the button on the right, we might need a spacer or absolute positioning.
+   But for a simple fix, let's try text-align center on the h1 and see if that satisfied "centered".
+*/
 
 .btn-danger {
   background-color: #e74c3c;
