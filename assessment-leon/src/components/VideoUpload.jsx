@@ -69,39 +69,44 @@ export default function VideoUpload({ session, onUploadComplete }) {
     }
 
     return (
-        <div className="upload-container" style={{ margin: '20px 0', padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
-            <h3>Upload New Video</h3>
-            <form onSubmit={handleUpload} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div>
-                    <label>Title:</label>
+        <div className="upload-container">
+            <h3>Submit New Content</h3>
+            <form onSubmit={handleUpload} className="upload-form">
+                <div className="input-group">
+                    <label>Title</label>
                     <input
                         type="text"
+                        placeholder="Enter video title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     />
                 </div>
-                <div>
-                    <label>Description:</label>
+                <div className="input-group">
+                    <label>Description</label>
                     <textarea
+                        placeholder="Enter video description (optional)"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        style={{ width: '100%', padding: '8px', marginTop: '5px' }}
+                        rows="3"
                     />
                 </div>
-                <div>
-                    <label>Video File:</label>
+                <div className="input-group">
+                    <label>Video File</label>
                     <input
                         type="file"
                         accept="video/*"
                         onChange={(e) => setVideoFile(e.target.files[0])}
                         required
-                        style={{ marginTop: '5px' }}
+                        className="file-input"
                     />
                 </div>
-                <button type="submit" disabled={uploading} style={{ alignSelf: 'center', padding: '10px 40px' }}>
-                    {uploading ? 'Uploading...' : 'Upload Video'}
+                <button type="submit" disabled={uploading}>
+                    {uploading ? (
+                        <span className="flex-center">
+                            Signaling...
+                        </span>
+                    ) : 'Upload Video'}
                 </button>
             </form>
         </div>

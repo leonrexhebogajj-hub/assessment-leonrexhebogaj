@@ -41,20 +41,17 @@ export default function Bookmarks({ session, videoId, currentTime, onRequestSeek
     }
 
     return (
-        <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
-            <h4 style={{ marginBottom: '10px' }}>Bookmarks</h4>
-            <form onSubmit={handleAddBookmark} style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+        <div className="bookmarks-section">
+            <h4>Bookmarks</h4>
+            <form onSubmit={handleAddBookmark} className="pill-form">
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Bookmark Title..."
-                    style={{ flex: 1, padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+                    placeholder="Title..."
+                    className="input-pill"
                 />
-                <button
-                    type="submit"
-                    style={{ padding: '8px 15px', background: '#27ae60', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                >
+                <button type="submit" className="btn-small">
                     Save
                 </button>
             </form>
@@ -64,20 +61,10 @@ export default function Bookmarks({ session, videoId, currentTime, onRequestSeek
                     <div
                         key={mark.id}
                         onClick={() => onRequestSeek(mark.timestamp)}
-                        style={{
-                            padding: '8px',
-                            background: '#f0fdf4',
-                            marginBottom: '5px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            fontSize: '14px',
-                            border: '1px solid #dcfce7'
-                        }}
+                        className="list-item"
                     >
                         <span>{mark.title}</span>
-                        <span style={{ color: '#27ae60', fontWeight: 'bold' }}>
+                        <span className="timestamp-badge">
                             {Math.floor(mark.timestamp)}s
                         </span>
                     </div>

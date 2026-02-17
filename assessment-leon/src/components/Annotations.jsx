@@ -42,47 +42,32 @@ export default function Annotations({ session, videoId, currentTime, onRequestSe
     }
 
     return (
-        <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
-            <h4 style={{ marginBottom: '10px' }}>Annotations</h4>
-            <form onSubmit={handleAddAnnotation} style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+        <div className="annotations-section">
+            <h4>Annotations</h4>
+            <form onSubmit={handleAddAnnotation} className="pill-form">
                 <input
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Add a note..."
-                    style={{ flex: 1, padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+                    className="input-pill"
                 />
-                <button
-                    type="submit"
-                    style={{ padding: '8px 15px', background: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                >
+                <button type="submit" className="btn-small">
                     Add
                 </button>
             </form>
 
             <div className="annotations-list">
                 {annotations.map((note) => {
-                    // Reactive Highlighting: Check if the video's current time is near the annotation timestamp
                     const isActive = Math.abs(currentTime - note.timestamp) < 2
                     return (
                         <div
                             key={note.id}
                             onClick={() => onRequestSeek(note.timestamp)}
-                            style={{
-                                padding: '8px',
-                                background: isActive ? '#e3f2fd' : '#f8f9fa',
-                                borderLeft: isActive ? '4px solid #3498db' : '4px solid transparent',
-                                marginBottom: '5px',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                fontSize: '14px',
-                                transition: 'all 0.3s ease'
-                            }}
+                            className={`list-item ${isActive ? 'active' : ''}`}
                         >
-                            <span style={{ fontWeight: isActive ? 'bold' : 'normal' }}>{note.text}</span>
-                            <span style={{ color: '#3498db', fontWeight: 'bold' }}>
+                            <span>{note.text}</span>
+                            <span className="timestamp-badge">
                                 {Math.floor(note.timestamp)}s
                             </span>
                         </div>

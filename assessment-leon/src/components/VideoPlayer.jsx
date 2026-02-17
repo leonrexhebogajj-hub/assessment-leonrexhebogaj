@@ -44,19 +44,21 @@ export default function VideoPlayer({ session }) {
     if (loading) return <p>Loading videos...</p>
 
     return (
-        <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <h2>Recent Uploads</h2>
+        <div className="video-player-section">
+            <div className="section-header">
+                <h2>Video Repository</h2>
                 <button
                     onClick={fetchVideos}
-                    style={{ width: 'auto', background: 'transparent', color: '#6366f1', border: '1px solid #6366f1' }}
+                    className="btn-small"
                 >
                     Refresh List
                 </button>
             </div>
 
             {videos.length === 0 ? (
-                <p style={{ color: '#64748b' }}>No videos uploaded yet.</p>
+                <div className="empty-state">
+                    <p>No videos uploaded yet.</p>
+                </div>
             ) : (
                 <div className="video-grid">
                     {videos.map((video) => (
@@ -73,7 +75,7 @@ export default function VideoPlayer({ session }) {
                                 <h3>{video.title}</h3>
                                 <p>{video.description}</p>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                <div className="video-actions-grid">
                                     <Bookmarks
                                         session={session}
                                         videoId={video.id}
