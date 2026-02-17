@@ -179,8 +179,8 @@ body {
 
 /* Dashboard Shell */
 body {
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: #0d1117;
+  color: #f0f6fc;
   min-height: 100vh;
 }
 
@@ -294,18 +294,19 @@ header h1 {
 
 .upload-container input[type="text"]:focus,
 .upload-container textarea:focus {
-  border-color: #818cf8 !important;
-  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.1) !important;
+  border-color: #6e7681 !important;
+  box-shadow: 0 0 0 4px rgba(110, 118, 129, 0.1) !important;
 }
 
 .upload-container button {
   width: 100%;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  color: white;
+  background: linear-gradient(135deg, #30363d 0%, #21262d 100%);
+  color: #c9d1d9;
+  border: 1px solid rgba(240, 246, 252, 0.1);
   padding: 1rem !important;
   border-radius: 14px !important;
   font-weight: 600;
-  box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3) !important;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Video Grid and Card */
@@ -381,7 +382,7 @@ header h1 {
 
 .input-pill:focus {
   outline: none;
-  border-color: #818cf8;
+  border-color: #6e7681;
   background: rgba(255, 255, 255, 0.06);
 }
 

@@ -7,8 +7,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
-  /* Deeper dark background */
+  background-color: #0d1117;
+  /* Dark charcoal grey */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,7 +19,7 @@
   --primary: #64748b;
   /* Slate grey */
   --primary-hover: #475569;
-  --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --bg-gradient: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.07);
   --text-main: #f1f5f9;
